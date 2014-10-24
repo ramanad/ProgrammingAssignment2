@@ -26,13 +26,23 @@
 ##   y %*% cacheSolve(dmat)  ### results in unit matrix
 ##
 
+
+## makeCacheMatrix(x)
+##   accepts a matrix `x' and returns a list containing the following four elements:
+##    set(y) # a function that accepts a matrix `y'. This replaces the exisitng `x'
+##    get() # simply returns the matrix `x'
+##    compute_inv() # computes the inverse of `x'. You don't need to call this!
+##    getinv() # simply return the inverse of `x'. Again, you don't need to call this!
+##       In order to get the inverse of matrix `x', 
+##        you would call cacheSolve() with an argument returned by makeCacheMatrix(x).
+
 makeCacheMatrix <- function(x = matrix()) {
   
   #### the matrix inverse is set to null, when 'x' is assigned for the first time.
   inv <- NULL
   
   #### function resets the matrix 'x', and then its inverse is set to NULL
-  set <- function(y){
+  set <- function(y = matrix()){
     x <<- y
     inv <<- NULL
   }
@@ -56,7 +66,12 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 
-## Write a short comment describing this functi
+## cacheSolve(x, ...)
+##    returns the inverse of the matrix contained in x$get()
+##    where `x' is the list object returned by calling makeCacheMatrix() with
+##    a matrix argument. The returned inverse is computed for the first time
+##    if it does not exist in the cache. If the inverse exists in the cache, the
+##    cached value is returned instead.
 
 cacheSolve <- function(x, ...) {
     ## Return a matrix that is the inverse of 'x'
