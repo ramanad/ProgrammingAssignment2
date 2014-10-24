@@ -1,7 +1,30 @@
-## Put comments here that give an overall description of what your
-## functions do
 
-## Write a short comment describing this function
+##
+## makeCacheMatrix(x) 
+##    accepts a matrix 'x', and returns a list with the following elements:
+##    set(y) ## set a matrix 'y' (this will overwrite the exisiting x)
+##    get()  ## returns 'x'
+##    compute_inv(...) ## computes inverse of 'x' using the function solve(x, ...)
+##    getinv() ## returns the inverse
+##
+## cacheSolve(x) 
+##    accepts a cached matrix 'x', the list object returned by the function makeCacheMatrix
+##    and returns the inverse of the matrix obtained by x$get() either by computing it, 
+##    or from the cache if it is already computed.
+
+## Example usage:
+##   d <- matrix(sample(1:16), ncol=4)
+##   dmat <- makeCacheMatrix(d)
+##   cacheSolve(dmat)  #### This prints the inverse of d
+##   cacheSolve(dmat)  #### This prints the inverse of d from the cache (because it is found above)
+##   d %*% cacheSolve(dmat) ### results in unit matrix.
+##
+##   y <- matrix(sample(17:32), ncol=4)
+##   dmat$set(y)
+##   cacheSolve(dmat)  ### This should print the inverse of y (NOT from cache)
+##   cacheSolve(dmat)  ### This should print the inverse of y from the cache.
+##   y %*% cacheSolve(dmat)  ### results in unit matrix
+##
 
 makeCacheMatrix <- function(x = matrix()) {
   
